@@ -9,10 +9,7 @@ public class GameOver : MonoBehaviour {
     public Canvas Gameplay;
     public Canvas Gameover;
     public Movement PHP;
-    
-    
 
-    
 	// Update is called once per frame
 	void Update ()
     {

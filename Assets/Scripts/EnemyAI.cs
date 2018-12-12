@@ -4,28 +4,34 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour {
 
-    private float HP = 1f;
-    
-    private float EnemySpeed = -0.05f;
+    protected float HP = 1f;
+    protected float EnemySpeed = -0.05f;
+    protected ScoreCounter count;
 
-    private ScoreCounter count;
+    protected SpriteRenderer Ow;
 
-    // Use this for initialization
-    void Start ()
+    protected Color colorOw = Color.red;
+    protected Color colorFine = Color.white;
+
+    protected virtual void Start ()
     {
         count = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<ScoreCounter>();
-        
+        Ow = GetComponent<SpriteRenderer>();
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+	protected virtual void Update ()
     {
         transform.Translate(0, EnemySpeed, 0);
     }
 
+    protected virtual void ChangeColor()
+    {
+        Ow.color = colorFine;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        print("ouch");
+        
         if (collision.collider.tag == "Player")
         {
             collision.collider.GetComponent<Movement>().Damage(3F);
@@ -34,14 +40,15 @@ public class EnemyAI : MonoBehaviour {
 
         else if (collision.collider.tag == "Shot")
         {
-            Debug.Log("shot");
             HP = HP - 1f;
             Destroy(collision.collider.gameObject);
+            Ow.color = colorOw;
+            Invoke("ChangeColor", 0.2F);
+
             if(HP < 1)
             {
                 count.Score += 10;
                 Destroy(this.gameObject);
-                
             }
         }
     }

@@ -2,26 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StrongEnemyAI : MonoBehaviour
+public class StrongEnemyAI : EnemyAI
 {
-
-    private float HP =3f;
-
-    private float EnemySpeed = -0.05f;
-
-    private ScoreCounter count;
-
-    // Use this for initialization
-    void Start()
-    {
+    
+    protected override void Start()
+    { 
         count = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<ScoreCounter>();
-
+        Ow = GetComponent<SpriteRenderer>();
+        HP = 3f;
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        transform.Translate(0, EnemySpeed, 0);
+        base.Update();
+    }
+
+    protected override void ChangeColor()
+    {
+        base.ChangeColor();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -35,9 +34,13 @@ public class StrongEnemyAI : MonoBehaviour
 
         else if (collision.collider.tag == "Shot")
         {
-            Debug.Log("shot");
+            
             HP = HP - 1f;
             Destroy(collision.collider.gameObject);
+            Ow.color = colorOw;
+            Invoke("ChangeColor", 0.3f);
+            
+
             if (HP < 1)
             {
                 count.Score += 50;

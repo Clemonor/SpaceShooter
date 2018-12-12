@@ -7,22 +7,11 @@ public class Movement : MonoBehaviour
 
     public float HorizonSpeed = 0.01f;
     public float VertiSpeed = 0.1f;
-    public GameObject projectile;
-    public Transform ship;
     public float PHP = 10f;
     
-
-
-
     void Update()
     {
         transform.Translate(0, Input.GetAxisRaw("Vertical") * VertiSpeed, 0);
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Instantiate(projectile, ship.position, ship.rotation);
-        }
-
 
     }
 
@@ -35,9 +24,19 @@ public class Movement : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "EnemyShot")
+        {
+            Damage(1f);
+            Destroy(collision.collider.gameObject);
+        }
+    }
+
     public void Death()
     {
         Destroy(gameObject);
-
     }
+
+
 }

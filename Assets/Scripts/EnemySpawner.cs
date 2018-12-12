@@ -9,12 +9,6 @@ public class EnemySpawner : MonoBehaviour {
     float cooldownTimer;
 
     public ScoreCounter Point;
-
-    void Start ()
-    {
-		
-	}
-	
 	
 	void Update ()
     {
@@ -49,11 +43,12 @@ public class EnemySpawner : MonoBehaviour {
     {
         if (Point.Score < 50)
         { return 1; }
-        else if (Point.Score >= 50 && Point.Score < 250)
+        else if (Point.Score >= 50 && Point.Score <= 250)
         { return 2; }
-        else if (Point.Score >= 250)
+        else if (Point.Score >= 250 && Point.Score < 500)
         { return 3; }
-       
+        else if (Point.Score > 500)
+        { return 4; }
 
            return 0;
     }

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 212321685940379848}
   - component: {fileID: 114951239389459538}
   - component: {fileID: 61450942818272082}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: StrongLost
   m_TagString: Enemy
   m_Icon: {fileID: 0}

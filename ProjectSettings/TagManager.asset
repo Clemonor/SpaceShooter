@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Shot
-  - TankEnemy
+  - EnemyShot
   layers:
   - Default
   - TransparentFX
@@ -18,10 +18,10 @@ TagManager:
   - 
   - P_projectile
   - Player
+  - E_projectile
+  - 
   - Enemy
-  - 
-  - 
-  - 
+  - Station
   - 
   - 
   - 
